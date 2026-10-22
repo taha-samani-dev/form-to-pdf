@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0e2c4b" />
+<title>فرم ثبت‌ نام آکادمی آریا</title>
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.css">
+<script src="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"></script>
+
+<style>
+  :root {
+    --navy: #0e2c4b;
+    --navy-2: #1f5f8b;
+    --gold: #c69b52;
+    --ink: #1a2632;
+    --muted: #5f7485;
+    --line: #d5e2ee;
+    --paper: #ffffff;
+    --bg: #eef3f8;
+    --soft: #f6f9fc;
+    --danger: #b42318;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; color: var(--ink); background: var(--bg); font-family: Vazirmatn, Tahoma, Arial, sans-serif; line-height: 1.8; font-size: 14.5px; }
+  .page { width: min(100% - 24px, 1000px); margin: 22px auto 40px; }
+
+  .hero { position: relative; overflow: hidden; color: #fff; background: linear-gradient(130deg, #0a2138, #1f5f8b); border-radius: 18px; padding: 26px clamp(18px, 4vw, 40px); box-shadow: 0 12px 30px #0e2c4b22; }
+  .hero::after { content: ""; position: absolute; left: -35px; top: -70px; width: 220px; height: 220px; border: 1px solid #ffffff2c; border-radius: 50%; box-shadow: 0 0 0 22px #ffffff09, 0 0 0 46px #ffffff08; }
+  .eyebrow { color: #a9cbe4; font-size: .78rem; letter-spacing: .04em; margin: 0 0 4px; }
+  h1 { margin: 0; font-size: clamp(1.4rem, 3.4vw, 2rem); font-weight: 800; }
+  .hero p:last-child { margin: 6px 0 0; color: #dbe8f2; max-width: 680px; font-size: .9rem; }
+
+  form { margin-top: 18px; }
+  fieldset { min-width: 0; border: 1px solid var(--line); border-radius: 14px; padding: clamp(14px, 2.6vw, 22px); margin: 0 0 14px; background: var(--paper); box-shadow: 0 5px 20px #0e2c4b08; }
+  legend { padding: 0 8px; font-weight: 800; color: var(--navy); font-size: 1.02rem; }
+  .section-note { color: var(--muted); font-size: .82rem; margin: -2px 0 14px; }
+
+  .grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px 14px; }
+  .field { min-width: 0; grid-column: span 2; }
+
+  label, .field-label { display: block; font-size: .86rem; font-weight: 700; margin-bottom: 5px; }
+  .required { color: var(--danger); }
+
+  input, select, textarea { display: block; width: 100%; min-height: 42px; border: 1px solid #c3d4e3; border-radius: 8px; padding: 8px 11px; color: var(--ink); background: #fff; font: inherit; font-size: .9rem; outline: none; transition: border-color .15s, box-shadow .15s; }
+  textarea { min-height: 70px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { border-color: var(--navy-2); box-shadow: 0 0 0 3px #1f5f8b1c; }
+  input::placeholder, textarea::placeholder { color: #98a8b4; }
+  .hint { color: var(--muted); font-size: .76rem; margin-top: 3px; }
+  .field-error { color: var(--danger); font-size: .76rem; margin-top: 3px; display: none; }
+  .field-error.show { display: block; }
+
+  .school-box { margin-top: 16px; padding: 13px; border: 1px solid var(--line); border-radius: 11px; background: var(--soft); }
+  .school-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin-top: 8px; }
+  .check-option { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; background: #fff; font-weight: 500; margin: 0; cursor: pointer; font-size: .84rem; }
+  .check-option input { width: 17px; min-height: 17px; height: 17px; margin: 0; accent-color: var(--navy); }
+
+  .agreement-list { display: grid; gap: 9px; padding: 0; margin: 0; list-style: none; counter-reset: rules; }
+  .agreement-list li { counter-increment: rules; position: relative; padding: 10px 42px 10px 12px; background: var(--soft); border: 1px solid var(--line); border-radius: 9px; font-size: .86rem; line-height: 1.9; }
+  .agreement-list li::before { content: counter(rules, persian); position: absolute; right: 12px; top: 11px; display: grid; place-items: center; width: 23px; height: 23px; border-radius: 6px; color: #fff; background: var(--navy); font-weight: 700; font-size: .78rem; }
+  .privacy { padding: 11px 13px; border-right: 4px solid var(--gold); background: #fbf7ef; border-radius: 7px; font-size: .84rem; margin-top: 13px; }
+
+  .commitment { padding: 15px; background: var(--soft); border: 1px solid var(--line); border-radius: 11px; margin-top: 14px; font-size: .9rem; }
+  .commitment p { margin: 0; line-height: 2.1; }
+  .commitment-input { display: inline-block; width: min(170px, 100%); min-height: 32px; padding: 3px 7px; vertical-align: middle; margin: 2px; border-radius: 6px; font-size: .86rem; }
+
+  .accept-row { display: flex; gap: 9px; align-items: flex-start; margin-top: 14px; font-size: .86rem; }
+  .accept-row input { width: 17px; min-height: 17px; height: 17px; margin-top: 5px; flex: 0 0 auto; accent-color: var(--navy); }
+
+  .signature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+  .signature-box { border: 1px dashed #b6c9da; border-radius: 9px; padding: 11px; min-height: 82px; }
+  .signature-box input { margin-top: 7px; }
+  .signature-box label { font-size: .82rem; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 9px; justify-content: flex-start; margin-top: 18px; }
+  button { border: 0; border-radius: 9px; padding: 11px 18px; font: inherit; font-weight: 700; font-size: .92rem; cursor: pointer; transition: transform .15s; }
+  button:hover { transform: translateY(-1px); }
+  .primary { color: #fff; background: var(--navy); }
+  .secondary { color: var(--navy); background: #e1ebf3; }
+  .ghost { color: #4a5a66; background: #e6ebef; }
+
+  .status { min-height: 22px; margin-top: 8px; font-size: .84rem; color: var(--navy-2); }
+  .status.error { color: var(--danger); }
+  .status ul { margin: 4px 0 0; padding-right: 18px; }
+
+  .footer { text-align: center; color: var(--muted); font-size: .76rem; margin: 14px 0 0; }
+
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; gap: 10px; }
+    .field { grid-column: span 1; }
+  }
+  @media (max-width: 620px) {
+    .page { width: min(100% - 14px, 1000px); margin-top: 8px; }
+    .hero { border-radius: 12px; padding: 20px 16px; }
+    .signature-grid { grid-template-columns: 1fr; gap: 10px; }
+    fieldset { padding: 14px 11px; border-radius: 10px; }
+    .actions { display: grid; grid-template-columns: 1fr; }
+    button { width: 100%; }
+    body { font-size: 14px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .page { width: 100%; margin: 0; }
+    .hero { background: #0e2c4b !important; color: #fff !important; box-shadow: none; border-radius: 0; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    fieldset { box-shadow: none; border: 1px solid #b7cee0; background: #fff; break-inside: avoid; }
+    .actions, .status, .footer { display: none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <p class="eyebrow">ACADEMY ARIA · ثبت‌نام و ارزیابی آموزشی</p>
+    <h1>فرم ثبت‌نام آکادمی آریا</h1>
+    <p>لطفاً اطلاعات را با دقت تکمیل کنید. فیلدهای ستاره‌دار الزامی هستند. در پایان می‌توانید فرم تکمیل‌شده را به صورت PDF یا Word ذخیره کنید.</p>
+  </header>
+
+  <form id="registrationForm" novalidate>
+    <fieldset>
+      <legend>۱. اطلاعات هویتی و شخصی دانش‌آموز</legend>
+      <p class="section-note">اطلاعات هویتی و راه‌های ارتباطی دانش‌آموز را وارد کنید.</p>
+      <div class="grid">
+        <div class="field">
+          <label for="firstName">نام <span class="required">*</span></label>
+          <input id="firstName" name="firstName" autocomplete="given-name" placeholder="فقط حروف فارسی" required />
+          <div class="field-error" id="errFirstName"></div>
+        </div>
+        <div class="field">
+          <label for="lastName">نام خانوادگی <span class="required">*</span></label>
+          <input id="lastName" name="lastName" autocomplete="family-name" placeholder="فقط حروف فارسی" required />
+          <div class="field-error" id="errLastName"></div>
+        </div>
+        <div class="field">
+          <label for="nationalCode">کد ملی (۱۰ رقم) <span class="required">*</span></label>
+          <input id="nationalCode" name="nationalCode" inputmode="numeric" maxlength="10" placeholder="مثلاً ۰۰۱۲۳۴۵۶۷۸" required />
+          <div class="field-error" id="errNationalCode"></div>
+        </div>
+        <div class="field">
+          <label for="studentPhone">شماره همراه دانش‌آموز (۱۱ رقم) <span class="required">*</span></label>
+          <input id="studentPhone" name="studentPhone" type="tel" inputmode="tel" maxlength="11" placeholder="09123456789" required />
+          <div class="field-error" id="errStudentPhone"></div>
+        </div>
+        <div class="field">
+          <label for="socialPhone">شماره همراه فضای مجازی</label>
+          <input id="socialPhone" name="socialPhone" type="tel" inputmode="tel" maxlength="11" placeholder="شماره قابل دسترس در پیام‌رسان‌ها" />
+        </div>
+        <div class="field">
+          <label for="mbti">تیپ شخصیتی MBTI <span class="required">*</span></label>
+          <select id="mbti" name="mbti" required>
+            <option value="">انتخاب کنید</option>
+            <option value="INTJ">INTJ — معمار</option>
+            <option value="INTP">INTP — منطق‌گرا</option>
+            <option value="ENTJ">ENTJ — فرمانده</option>
+            <option value="ENTP">ENTP — مناظره‌گر</option>
+            <option value="INFJ">INFJ — حامی</option>
+            <option value="INFP">INFP — میانجی</option>
+            <option value="ENFJ">ENFJ — قهرمان</option>
+            <option value="ENFP">ENFP — مبارز</option>
+            <option value="ISTJ">ISTJ — لجستیک‌دان</option>
+            <option value="ISFJ">ISFJ — مدافع</option>
+            <option value="ESTJ">ESTJ — مدیر اجرایی</option>
+            <option value="ESFJ">ESFJ — کنسول</option>
+            <option value="ISTP">ISTP — ماهر</option>
+            <option value="ISFP">ISFP — ماجراجو</option>
+            <option value="ESTP">ESTP — کارآفرین</option>
+            <option value="ESFP">ESFP — سرگرم‌کننده</option>
+          </select>
+          <div class="field-error" id="errMbti"></div>
+        </div>
+        <div class="field">
+          <label for="province">استان محل سکونت <span class="required">*</span></label>
+          <select id="province" name="province" required>
+            <option value="">استان را انتخاب کنید</option>
+          </select>
+          <div class="field-error" id="errProvince"></div>
+        </div>
+        <div class="field">
+          <label for="city">شهر محل سکونت <span class="required">*</span></label>
+          <input id="city" name="city" list="cityList" placeholder="شهر را جستجو یا انتخاب کنید" required disabled />
+          <datalist id="cityList"></datalist>
+          <div class="field-error" id="errCity"></div>
+        </div>
+      </div>
+
+      <div class="school-box">
+        <span class="field-label">شما در چه نوع مدرسه‌ای تحصیل کرده‌اید؟ <span class="required">*</span></span>
+        <div class="school-options">
+          <label class="check-option"><input type="radio" name="schoolType" value="دولتی" /> دولتی</label>
+          <label class="check-option"><input type="radio" name="schoolType" value="غیردولتی" /> غیردولتی</label>
+          <label class="check-option"><input type="radio" name="schoolType" value="شاهد" /> شاهد</label>
+          <label class="check-option"><input type="radio" name="schoolType" value="نمونه دولتی" /> نمونه دولتی</label>
+          <label class="check-option"><input type="radio" name="schoolType" value="تیزهوشان / سمپاد" /> تیزهوشان / سمپاد</label>
+        </div>
+        <div class="field-error" id="errSchoolType"></div>
+      </div>
+
+      <div class="school-box" style="margin-top:14px">
+        <span class="field-label">اهداف تحصیلی (می‌توانید چند مورد را انتخاب کنید)</span>
+        <div class="school-options">
+          <label class="check-option"><input type="checkbox" name="goals" value="رشته دانشگاهی" /> رشته دانشگاهی</label>
+          <label class="check-option"><input type="checkbox" name="goals" value="رتبه کنکور" /> رتبه کنکور</label>
+          <label class="check-option"><input type="checkbox" name="goals" value="شهر محل تحصیل" /> شهر محل تحصیل</label>
+        </div>
+        <div style="margin-top:10px">
+          <label for="goalsDetail">توضیحات اهداف (اختیاری)</label>
+          <textarea id="goalsDetail" name="goalsDetail" rows="2" placeholder="مثلاً: پزشکی دانشگاه تهران، رتبه زیر ۱۰۰، تحصیل در تهران"></textarea>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>۲. اطلاعات والدین / سرپرست</legend>
+      <div class="grid">
+        <div class="field"><label for="fatherName">نام و نام خانوادگی پدر / سرپرست</label><input id="fatherName" name="fatherName" /></div>
+        <div class="field"><label for="fatherPhone">شماره همراه پدر / سرپرست</label><input id="fatherPhone" name="fatherPhone" type="tel" inputmode="tel" maxlength="11" placeholder="شماره ۱۱ رقمی" /></div>
+        <div class="field">
+          <label for="fatherEducation">تحصیلات پدر / سرپرست</label>
+          <select id="fatherEducation" name="fatherEducation">
+            <option value="">انتخاب کنید</option>
+            <option>زیر دیپلم</option><option>دیپلم</option><option>کاردانی</option>
+            <option>کارشناسی</option><option>کارشناسی ارشد</option><option>دکتری</option>
+          </select>
+        </div>
+        <div class="field"><label for="fatherJob">شغل پدر / سرپرست</label><input id="fatherJob" name="fatherJob" /></div>
+        <div class="field"><label for="motherPhone">شماره همراه مادر / شماره اضطراری</label><input id="motherPhone" name="motherPhone" type="tel" inputmode="tel" maxlength="11" placeholder="شماره ۱۱ رقمی" /></div>
+        <div class="field">
+          <label for="motherEducation">تحصیلات مادر</label>
+          <select id="motherEducation" name="motherEducation">
+            <option value="">انتخاب کنید</option>
+            <option>زیر دیپلم</option><option>دیپلم</option><option>کاردانی</option>
+            <option>کارشناسی</option><option>کارشناسی ارشد</option><option>دکتری</option>
+          </select>
+        </div>
+        <div class="field"><label for="motherJob">شغل مادر</label><input id="motherJob" name="motherJob" /></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>۳. اطلاعات تحصیلی و کنکور</legend>
+      <div class="grid">
+        <div class="field">
+          <label for="highSchoolMajor">رشته تحصیلی دبیرستان <span class="required">*</span></label>
+          <select id="highSchoolMajor" name="highSchoolMajor" required>
+            <option value="">انتخاب کنید</option>
+            <option>علوم تجربی</option><option>ریاضی و فیزیک</option>
+            <option>علوم انسانی</option><option>فنی و حرفه‌ای</option><option>کاردانش</option><option>سایر</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="grade">پایه تحصیلی <span class="required">*</span></label>
+          <select id="grade" name="grade" required>
+            <option value="">انتخاب کنید</option>
+            <option>دهم</option><option>یازدهم</option><option>دوازدهم</option>
+            <option>فارغ‌التحصیل</option><option>پشت‌کنکوری</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="examYear">سال شرکت در کنکور موردنظر <span class="required">*</span></label>
+          <input id="examYear" name="examYear" type="number" inputmode="numeric" min="1405" max="1505" step="1" placeholder="مثلاً ۱۴۰۶" required />
+          <div class="field-error" id="errExamYear"></div>
+        </div>
+      </div>
+
+      <div class="school-box">
+        <span class="field-label">در صورت شرکت در کنکور یا امتحانات نهایی سال‌های گذشته، اطلاعات زیر را وارد کنید.</span>
+        <div class="grid" style="margin-top:10px">
+          <div class="field">
+            <label for="grade11Score">نمره نهایی یازدهم (۰ تا ۲۰)</label>
+            <input id="grade11Score" name="grade11Score" type="number" inputmode="decimal" min="0" max="20" step="0.01" placeholder="در صورت وجود" />
+            <div class="field-error" id="errGrade11Score"></div>
+          </div>
+          <div class="field">
+            <label for="grade12Score">نمره نهایی دوازدهم (۰ تا ۲۰)</label>
+            <input id="grade12Score" name="grade12Score" type="number" inputmode="decimal" min="0" max="20" step="0.01" placeholder="در صورت وجود" />
+            <div class="field-error" id="errGrade12Score"></div>
+          </div>
+          <div class="field">
+            <label for="previousRank">رتبه کنکور</label>
+            <input id="previousRank" name="previousRank" type="number" inputmode="numeric" min="1" step="1" placeholder="در صورت وجود" />
+            <div class="field-error" id="errPreviousRank"></div>
+          </div>
+          <div class="field">
+            <label for="previousTraz">تراز کنکور</label>
+            <input id="previousTraz" name="previousTraz" type="number" inputmode="numeric" min="0" step="1" placeholder="در صورت وجود" />
+            <div class="field-error" id="errPreviousTraz"></div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>۴. ارزیابی درسی و تعیین سطح</legend>
+      <div class="grid">
+        <div class="field">
+          <label for="strengths">درس‌های نقطه قوت</label>
+          <input id="strengths" name="strengths" list="subjectsList" placeholder="تایپ کنید یا از لیست انتخاب کنید" />
+          <datalist id="subjectsList">
+            <option>ریاضی</option><option>فیزیک</option><option>شیمی</option><option>زیست‌شناسی</option>
+            <option>ادبیات فارسی</option><option>عربی</option><option>دین و زندگی</option><option>زبان انگلیسی</option>
+            <option>تاریخ</option><option>جغرافیا</option><option>اقتصاد</option><option>منطق</option>
+            <option>فلسفه</option><option>روان‌شناسی</option><option>زمین‌شناسی</option><option>آمار و احتمال</option>
+            <option>هندسه</option><option>حساب دیفرانسیل</option><option>علوم اجتماعی</option><option>علوم و فنون</option>
+          </datalist>
+        </div>
+        <div class="field">
+          <label for="weaknesses">درس‌های نقطه ضعف</label>
+          <input id="weaknesses" name="weaknesses" list="subjectsList" placeholder="تایپ کنید یا از لیست انتخاب کنید" />
+        </div>
+        <div class="field">
+          <label for="dailyStudy">ساعت مطالعه اختصاصی روزانه (۱ تا ۱۶)</label>
+          <input id="dailyStudy" name="dailyStudy" type="number" inputmode="numeric" min="1" max="16" step="1" placeholder="مثلاً ۴" />
+          <div class="field-error" id="errDailyStudy"></div>
+        </div>
+        <div class="field">
+          <label for="maxStudy">حداکثر توان مطالعه روزانه (۱ تا ۱۶)</label>
+          <input id="maxStudy" name="maxStudy" type="number" inputmode="numeric" min="1" max="16" step="1" placeholder="مثلاً ۸" />
+          <div class="field-error" id="errMaxStudy"></div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>۵. تعهدات و قوانین آکادمی آریا</legend>
+      <ol class="agreement-list">
+        <li>ثبت‌نام‌کننده متعهد به اجرا و انجام برنامه شخصی‌سازی‌شده خود است.</li>
+        <li>شهریه ثبت‌نام طبق تعرفه‌های مصوب آکادمی آریا، در زمان مشخص‌شده و بدون تأخیر پرداخت خواهد شد. در صورت نیاز به تأخیر، لازم است موضوع حتماً در گروه شخصی اعلام و مجوز تأخیر دریافت شود.</li>
+        <li>در صورت لغو ثبت‌نام برای ماه آینده، باید ۵ تا ۷ روز پیش از پایان ماه اطلاع‌رسانی انجام شود.</li>
+        <li>غیبت‌های غیرموجه بیش از ۳ جلسه، ابتدا موجب هشدار به والدین و سپس حذف از برنامه‌های ویژه مشاوره‌ای خواهد شد.</li>
+      </ol>
+      <div class="privacy">کلیه اطلاعات ثبت‌شده محرمانه بوده و صرفاً برای بهبود فرآیند آموزشی استفاده می‌شود.</div>
+
+      <div class="commitment">
+        <span class="field-label">متن تعهد</span>
+        <p>
+          اینجانب
+          <input class="commitment-input" id="commitmentName" aria-label="نام و نام خانوادگی در متن تعهد" placeholder="نام و نام خانوادگی" required />
+          با کد ملی
+          <input class="commitment-input" id="commitmentNationalCode" aria-label="کد ملی در متن تعهد" inputmode="numeric" maxlength="10" placeholder="کد ملی ۱۰ رقمی" required />
+          با آگاهی کامل از قوانین فوق، شرایط ثبت‌نام در آکادمی آریا را می‌پذیرم و خود را موظف می‌دانم که برای رسیدن به موفقیت، با اعتماد به مؤسسه آریا، تمام تلاش خود را در راستای انجام کارها، شرکت در کلاس‌ها و اجرای برنامه‌های تنظیم‌شده به کار بگیرم. در صورت انجام‌ندادن تعهدات، مسئولیت پیامدهای آن را مطابق توافق و قوانین مربوطه می‌پذیرم.
+        </p>
+        <label class="accept-row">
+          <input type="checkbox" id="acceptRules" required />
+          <span>قوانین و تعهدات بالا را مطالعه کرده‌ام و می‌پذیرم. <span class="required">*</span></span>
+        </label>
+        <div class="field-error" id="errAcceptRules"></div>
+      </div>
+
+      <div class="signature-grid">
+        <div class="signature-box">
+          <label for="signature">امضا (نام امضاکننده را وارد کنید یا پس از چاپ امضا کنید)</label>
+          <input id="signature" name="signature" placeholder="نام و نام خانوادگی" />
+        </div>
+        <div class="signature-box">
+          <label for="signDate">تاریخ (جلالی)</label>
+          <input id="signDate" name="signDate" data-jdp placeholder="۱۴۰۴/۰۵/۱۲" readonly />
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="actions">
+      <button class="primary" type="button" id="downloadPdf">چاپ / ذخیره به صورت PDF</button>
+      <button class="secondary" type="button" id="downloadWord">دانلود فایل Word</button>
+      <button class="ghost" type="reset">پاک‌کردن فرم</button>
+    </div>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+  </form>
+  <p class="footer">آکادمی آریا · فرم ثبت‌نام و ارزیابی آموزشی</p>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ============================================================
+     داده‌ها
+     ============================================================ */
+  const provinces = [
+    'آذربایجان شرقی','آذربایجان غربی','اردبیل','اصفهان','البرز','ایلام','بوشهر',
+    'تهران','چهارمحال و بختیاری','خراسان جنوبی','خراسان رضوی','خراسان شمالی',
+    'خوزستان','زنجان','سمنان','سیستان و بلوچستان','فارس','قزوین','قم','کردستان',
+    'کرمان','کرمانشاه','کهگیلویه و بویراحمد','گلستان','گیلان','لرستان','مازندران',
+    'مرکزی','هرمزگان','همدان','یزد'
+  ];
+
+  const citiesByProvince = {
+    'آذربایجان شرقی': ['تبریز','مراغه','مرند','میانه','اهر','بناب','سراب','شبستر','آذرشهر','اسکو','عجب‌شیر','ملکان','هریس','بستان‌آباد','جلفا','کلیبر','هشترود','چاراویماق','ورزقان','خداآفرین'],
+    'آذربایجان غربی': ['ارومیه','خوی','میاندوآب','مهاباد','بوکان','سلماس','نقده','پیرانشهر','ماکو','سردشت','شاهیندژ','تکاب','چالدران','اشنویه','پلدشت','شوط','چایپاره'],
+    'اردبیل': ['اردبیل','پارس‌آباد','مشگین‌شهر','خلخال','گرمی','بیله‌سوار','نمین','نیر','کوثر','سرعین','اصلاندوز','انگوت'],
+    'اصفهان': ['اصفهان','کاشان','خمینی‌شهر','نجف‌آباد','شهرضا','شاهین‌شهر','فولادشهر','زرین‌شهر','آران و بیدگل','گلپایگان','نائین','اردستان','نطنز','سمیرم','خوانسار','فریدن','دهاقان','مبارکه','تیران و کرون'],
+    'البرز': ['کرج','فردیس','کمال‌شهر','محمدشهر','مشکیندشت','هشتگرد','نظرآباد','اشتهارد','طالقان','آسارا','گرمدره','چهارباغ','تنکمان'],
+    'ایلام': ['ایلام','ایوان','دهلران','آبدانان','دره‌شهر','مهران','ملکشاهی','بدره','چرداول','سیروان','هلیلان'],
+    'بوشهر': ['بوشهر','برازجان','گناوه','دیلم','کنگان','جم','عسلویه','خورموج','دیر','اهرم','بندر دیر','بندر کنگان','بندر ریگ','شنبه','کاکی'],
+    'تهران': ['تهران','اسلامشهر','شهریار','قدس','ملارد','پاکدشت','ورامین','قرچک','رباط‌کریم','پرند','اندیشه','نسیم‌شهر','گلستان','چهاردانگه','باقرشهر','کهریزک','ری','شمشک','فشم','لواسان','دماوند','فیروزکوه','پردیس','بومهن','جاجرود','صباشهر','وحیدیه','فردوسیه','ارجمند'],
+    'چهارمحال و بختیاری': ['شهرکرد','بروجن','فارسان','سامان','فرخ‌شهر','اردل','ناغان','کیان','لردگان','بن','سودجان','هفشجان','طاقانک','بلداجی','گندمان','دستنا'],
+    'خراسان جنوبی': ['بیرجند','قائن','فردوس','نهبندان','طبس','بشرویه','سربیشه','خوسف','درمیان','اسدیه','مود','زهان','آرین‌شهر','عشق‌آباد'],
+    'خراسان رضوی': ['مشهد','نیشابور','سبزوار','تربت حیدریه','قوچان','کاشمر','تربت جام','چناران','خواف','گناباد','درگز','سرخس','فریمان','بردسکن','طرقبه','شاندیز','گلبهار','جغتای','خلیل‌آباد','کلات','رشتخوار','باخرز','مه‌ولات','زاوه','داورزن','جوین'],
+    'خراسان شمالی': ['بجنورد','شیروان','اسفراین','آشخانه','گرمه','جاجرم','فاروج','راز','مانه','صفي‌آباد','قاضی','لوجلی','حصارگرمخان'],
+    'خوزستان': ['اهواز','آبادان','خرمشهر','دزفول','اندیمشک','بهبهان','شوشتر','شوش','ایذه','مسجدسلیمان','رامهرمز','باغملک','هندیجان','امیدیه','ماهشهر','شادگان','حمیدیه','سوسنگرد','هویزه','رامشیر','لالی','اندیکا','کارون','باوی','دشت آزادگان'],
+    'زنجان': ['زنجان','ابهر','خرمدره','قیدار','هیدج','صائین‌قلعه','ماه‌نشان','طارم','ایجرود','سلطانیه','آب‌بر','چورزق','گرماب','دندی'],
+    'سمنان': ['سمنان','شاهرود','دامغان','گرمسار','مهدی‌شهر','بسطام','میامی','آرادان','سرخه','مجن','بیارجمند','ایوانکی','شهمیرزاد'],
+    'سیستان و بلوچستان': ['زاهدان','زابل','ایرانشهر','چابهار','سراوان','خاش','نیک‌شهر','کنارک','سرباز','دلگان','مهرستان','میرجاوه','فنوج','قصرقند','هیرمند','نیمروز','هامون','زهک','سیب و سوران'],
+    'فارس': ['شیراز','مرودشت','کازرون','جهرم','فسا','داراب','لار','آباده','صفاشهر','نی‌ریز','استهبان','اقلید','قیر و کارزین','فیروزآباد','ممسنی','سپیدان','زرین‌دشت','خرامه','سروستان','کوار','فراشبند','بوانات','ارسنجان','پاسارگاد','خرم‌بید','رستم','مهر','لامرد','گراش','اوز','جویم','حاجی‌آباد','بختگان'],
+    'قزوین': ['قزوین','تاکستان','آبیک','بوئین‌زهرا','محمدیه','الوند','شال','آوج','اقبالیه','محمودآباد نمونه','رازمیان','کوهین','اسفرورین','ضیاءآباد','خرمدشت','نرجه'],
+    'قم': ['قم','قنوات','جعفریه','سلفچگان','کهک','دستجرد','نوفل لوشاتو'],
+    'کردستان': ['سنندج','سقز','مریوان','بانه','قروه','بیجار','کامیاران','دیواندره','دهگلان','سروآباد','سریش‌آباد','بلبان‌آباد','چناره','اورامان'],
+    'کرمان': ['کرمان','سیرجان','رفسنجان','جیرفت','بم','زرند','کهنوج','بردسیر','شهربابک','بافت','میانده','ریگان','فهرج','عنبرآباد','منوجان','راور','کوهبنان','نرماشیر','انار'],
+    'کرمانشاه': ['کرمانشاه','اسلام‌آباد غرب','هرسین','کنگاور','سنقر','پاوه','جوانرود','روانسر','صحنه','قصر شیرین','گیلانغرب','سرپل ذهاب','ثلاث باباجانی','دالاهو','کرند غرب','باینگان'],
+    'کهگیلویه و بویراحمد': ['یاسوج','دوگنبدان','دهدشت','سی‌سخت','لیکک','چرام','باشت','مارگون','لنده','دیشموک','قلعه رئیسی','سوق','پاتاوه'],
+    'گلستان': ['گرگان','گنبد کاووس','علی‌آباد','بندر ترکمن','آق‌قلا','کردکوی','بندر گز','مینودشت','آزادشهر','رامیان','گالیکش','کلاله','مراوه‌تپه','گمیشان','اینچه‌برون','نوکنده'],
+    'گیلان': ['رشت','بندر انزلی','لاهیجان','آستارا','آستانه اشرفیه','تالش','فومن','صومعه سرا','رودسر','لنگرود','ماسال','شفت','سیاهکل','املش','رضوانشهر','ماسوله','خمام','سنگر','کوچصفهان','لشت نشاء','رودبار','منجیل','لوشان','جیرنده','بره‌سر','توتکابن','چابکسر','کلاچای','واجارگاه','رحیم‌آباد','کیاشهر','پیربازار','خشکبیجار','لولمان','طاهرگوراب','ضیابر','مرجقل','گوراب زرمیخ','ماکلوان','اسالم','حویق','چوبر','لیسار'],
+    'لرستان': ['خرم‌آباد','بروجرد','دورود','الیگودرز','کوهدشت','نورآباد','ازنا','پل‌دختر','الشتر','سپیددشت','ویسیان','چگنی','دلفان','رومشکان','معمولان','کونانی','چقابل'],
+    'مازندران': ['ساری','بابل','آمل','قائم‌شهر','بهشهر','چالوس','نوشهر','رامسر','تنکابن','نور','محمودآباد','فریدونکنار','بابلسر','جویبار','سوادکوه','نکا','گلوگاه','عباس‌آباد','کلاردشت','مرزن‌آباد','هچیرود','بندر نوشهر','ایزدشهر','شیرود','خرم‌آباد','نشتارود','کلارآباد','سلمان‌شهر','کجور','بلده','پل سفید','زیرآب','شیرگاه','کیاسر','فریم','دودانگه','چهاردانگه'],
+    'مرکزی': ['اراک','ساوه','خمین','محلات','دلیجان','شازند','تفرش','آشتیان','کمیجان','فراهان','زرندیه','شهباز','نوبران','غرق آباد','آوه','نراق','نیمور','مهاجران','هندودر','توره','آستانه','کارچان','ساروق','داودآباد','قورچی باشی','خنداب','سرقنات'],
+    'هرمزگان': ['بندرعباس','قشم','میناب','بندر لنگه','بندر خمیر','حاجی‌آباد','پارسیان','رودان','سیریک','بشاگرد','بستک','کیش','ابوموسی','بندر جاسک','سندرک','فین','قلعه قاضی','تخت','بیکاء'],
+    'همدان': ['همدان','ملایر','نهاوند','تویسرکان','اسدآباد','بهار','کبودراهنگ','رزن','فامنین','لالجین','مریانج','جورقان','قهاوند','گل‌تپه','صالح‌آباد','دمق','فیروزان','زنگنه','سامن','برزول','گیان'],
+    'یزد': ['یزد','میبد','اردکان','بافق','مهریز','تفت','ابرکوه','خاتم','اشکذر','بهاباد','مروست','هرات','نیر','مبارکه','رضوانشهر','زارچ','حمیدیا','شاهدیه','عقدا','خرانق']
+  };
+
+  /* ============================================================
+     ابزارهای کمکی
+     ============================================================ */
+  const form = document.getElementById('registrationForm');
+  const statusBox = document.getElementById('status');
+  const faDigits = '۰۱۲۳۴۵۶۷۸۹';
+
+  function toEnglishDigits(v) {
+    return String(v ?? '').replace(/[۰-۹]/g, d => faDigits.indexOf(d)).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+  }
+  function escapeHtml(v) {
+    return String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+  }
+  function isValidPersianName(str) { return /^[\u0600-\u06FF\u200c\s]{2,50}$/.test(str.trim()); }
+  function isValidIranianNationalCode(code) {
+    if (!/^\d{10}$/.test(code)) return false;
+    if (/^(\d)\1{9}$/.test(code)) return false;
+    const check = +code[9];
+    let sum = 0;
+    for (let i = 0; i < 9; i++) sum += +code[i] * (10 - i);
+    const r = sum % 11;
+    return (r < 2 && check === r) || (r >= 2 && check === 11 - r);
+  }
+  function isValidMobile(phone) { return /^09\d{9}$/.test(phone); }
+  function showError(id, msg) { const el = document.getElementById(id); if (!el) return; el.textContent = msg; el.classList.add('show'); }
+  function clearAllErrors() { form.querySelectorAll('.field-error').forEach(el => { el.textContent = ''; el.classList.remove('show'); }); }
+
+  /* ============================================================
+     عناصر
+     ============================================================ */
+  const firstName = document.getElementById('firstName');
+  const lastName = document.getElementById('lastName');
+  const nationalCode = document.getElementById('nationalCode');
+  const studentPhone = document.getElementById('studentPhone');
+  const socialPhone = document.getElementById('socialPhone');
+  const mbti = document.getElementById('mbti');
+  const province = document.getElementById('province');
+  const city = document.getElementById('city');
+  const cityList = document.getElementById('cityList');
+  const commitmentName = document.getElementById('commitmentName');
+  const commitmentNational = document.getElementById('commitmentNationalCode');
+
+  [firstName, lastName].forEach(input => input.addEventListener('input', () => { input.value = input.value.replace(/[^\u0600-\u06FF\u200c\s]/g, ''); }));
+  [nationalCode, studentPhone, socialPhone, commitmentNational].forEach(input => input.addEventListener('input', () => { input.value = toEnglishDigits(input.value).replace(/\D/g, ''); }));
+
+  provinces.forEach(p => { const opt = document.createElement('option'); opt.value = p; opt.textContent = p; province.appendChild(opt); });
+
+  function syncCommitment() {
+    if (!commitmentName.dataset.edited) commitmentName.value = `${firstName.value.trim()} ${lastName.value.trim()}`.trim();
+    if (!commitmentNational.dataset.edited) commitmentNational.value = nationalCode.value;
+  }
+  [firstName, lastName, nationalCode].forEach(el => el.addEventListener('input', syncCommitment));
+  commitmentName.addEventListener('input', e => e.target.dataset.edited = 'true');
+  commitmentNational.addEventListener('input', e => e.target.dataset.edited = 'true');
+
+  province.addEventListener('change', () => {
+    const selected = province.value;
+    cityList.innerHTML = '';
+    city.value = '';
+    if (selected && citiesByProvince[selected]) {
+      city.disabled = false;
+      citiesByProvince[selected].forEach(c => { const opt = document.createElement('option'); opt.value = c; cityList.appendChild(opt); });
+    } else { city.disabled = true; }
+  });
+
+  /* ============================================================
+     جمع‌آوری داده — همه فیلدها (حتی خالی)
+     ============================================================ */
+  function collectData() {
+    const sections = [];
+    form.querySelectorAll('fieldset').forEach(fs => {
+      const legend = fs.querySelector('legend')?.textContent.trim() || '';
+      const rows = [];
+      const handled = new Set();
+
+      // فیلدهای input/select/textarea — همه اضافه می‌شوند (حتی خالی)
+      fs.querySelectorAll('input:not([type="checkbox"]):not([type="radio"]):not([type="reset"]):not([type="button"]), select, textarea').forEach(el => {
+        if (el.type === 'hidden' || !el.id || handled.has(el.id)) return;
+        if (el.id === 'commitmentName' || el.id === 'commitmentNationalCode') return;
+        if (el.id === 'acceptRules') return;
+        handled.add(el.id);
+        const label = fs.querySelector(`label[for="${el.id}"]`);
+        const labelText = label ? label.textContent.replace('*', '').trim() : el.name;
+        const rawValue = el.value.trim();
+        const displayValue = rawValue ? rawValue : '—';
+        rows.push({ label: labelText, value: displayValue, wide: false });
+      });
+
+      // نوع مدرسه — همیشه اضافه
+      const schoolRadios = fs.querySelectorAll('input[name="schoolType"]');
+      if (schoolRadios.length) {
+        const checked = fs.querySelector('input[name="schoolType"]:checked');
+        rows.push({ label: 'نوع مدرسه', value: checked ? checked.value : '—', wide: false });
+      }
+
+      // اهداف تحصیلی — همیشه اضافه
+      const goalsInputs = fs.querySelectorAll('input[name="goals"]');
+      if (goalsInputs.length) {
+        const checked = [...fs.querySelectorAll('input[name="goals"]:checked')].map(el => el.value);
+        rows.push({ label: 'اهداف تحصیلی', value: checked.length ? checked.join('، ') : '—', wide: true });
+      }
+
+      // متن تعهد و پذیرش — همیشه اضافه
+      if (legend.includes('تعهدات')) {
+        rows.push({ label: 'نام در متن تعهد', value: commitmentName.value.trim() || '—', wide: false });
+        rows.push({ label: 'کد ملی در متن تعهد', value: commitmentNational.value.trim() || '—', wide: false });
+        rows.push({ label: 'پذیرش قوانین', value: document.getElementById('acceptRules').checked ? 'پذیرفته شد' : 'پذیرفته نشد', wide: false });
+      }
+
+      if (rows.length) sections.push({ title: legend, rows });
+    });
+    return sections;
+  }
+
+  /* ============================================================
+     اعتبارسنجی (فقط روی فیلدهای الزامی)
+     ============================================================ */
+  function validateForm() {
+    clearAllErrors();
+    syncCommitment();
+    const errors = [];
+
+    if (!isValidPersianName(firstName.value)) { errors.push('نام باید فقط با حروف فارسی و بین ۲ تا ۵۰ حرف باشد.'); showError('errFirstName', 'فقط حروف فارسی (۲ تا ۵۰ حرف).'); }
+    if (!isValidPersianName(lastName.value)) { errors.push('نام خانوادگی باید فقط با حروف فارسی باشد.'); showError('errLastName', 'فقط حروف فارسی.'); }
+    if (!isValidIranianNationalCode(nationalCode.value)) { errors.push('کد ملی ۱۰ رقمی معتبر نیست.'); showError('errNationalCode', 'کد ملی معتبر نیست.'); }
+    if (!isValidMobile(studentPhone.value)) { errors.push('شماره همراه باید با ۰۹ شروع و ۱۱ رقم باشد.'); showError('errStudentPhone', 'شماره همراه معتبر نیست.'); }
+    if (!mbti.value) { errors.push('تیپ شخصیتی MBTI را انتخاب کنید.'); showError('errMbti', 'الزامی است.'); }
+    if (!province.value) { errors.push('استان محل سکونت را انتخاب کنید.'); showError('errProvince', 'الزامی است.'); }
+    if (!city.value.trim()) { errors.push('شهر محل سکونت را وارد کنید.'); showError('errCity', 'الزامی است.'); }
+    else if (province.value && citiesByProvince[province.value] && !citiesByProvince[province.value].includes(city.value.trim())) {
+      errors.push('شهر انتخابی با استان مطابقت ندارد.'); showError('errCity', 'شهر در استان انتخابی نیست.');
+    }
+    if (!form.querySelector('input[name="schoolType"]:checked')) { errors.push('نوع مدرسه را انتخاب کنید.'); showError('errSchoolType', 'الزامی است.'); }
+
+    const examYear = document.getElementById('examYear');
+    const examYearVal = parseInt(toEnglishDigits(examYear.value), 10);
+    if (!examYear.value) { errors.push('سال کنکور را وارد کنید.'); showError('errExamYear', 'الزامی است.'); }
+    else if (isNaN(examYearVal) || examYearVal < 1405 || examYearVal > 1505) { errors.push('سال کنکور باید بین ۱۴۰۵ و ۱۵۰۵ باشد.'); showError('errExamYear', 'بین ۱۴۰۵ تا ۱۵۰۵.'); }
+
+    ['grade11Score', 'grade12Score'].forEach(id => {
+      const el = document.getElementById(id);
+      const val = parseFloat(toEnglishDigits(el.value));
+      if (el.value && (isNaN(val) || val < 0 || val > 20)) {
+        errors.push(`نمره باید بین ۰ تا ۲۰ باشد.`);
+        showError('err' + id.charAt(0).toUpperCase() + id.slice(1), 'بین ۰ تا ۲۰.');
+      }
+    });
+
+    ['dailyStudy', 'maxStudy'].forEach(id => {
+      const el = document.getElementById(id);
+      const val = parseInt(toEnglishDigits(el.value), 10);
+      if (el.value && (isNaN(val) || val < 1 || val > 16)) {
+        errors.push(`ساعت باید بین ۱ تا ۱۶ باشد.`);
+        showError('err' + id.charAt(0).toUpperCase() + id.slice(1), 'بین ۱ تا ۱۶.');
+      }
+    });
+
+    if (!document.getElementById('acceptRules').checked) { errors.push('پذیرش قوانین الزامی است.'); showError('errAcceptRules', 'تیک بزنید.'); }
+    if (!isValidIranianNationalCode(commitmentNational.value)) { errors.push('کد ملی در متن تعهد معتبر نیست.'); }
+
+    if (errors.length) {
+      statusBox.innerHTML = '<strong>لطفاً موارد زیر را اصلاح کنید:</strong><ul>' + errors.map(e => `<li>${escapeHtml(e)}</li>`).join('') + '</ul>';
+      statusBox.className = 'status error';
+      return false;
+    }
+    statusBox.textContent = '';
+    statusBox.className = 'status';
+    return true;
+  }
+
+  /* ============================================================
+     جدول ۴ ستونی — همه ردیف‌ها (خالی = —)
+     ============================================================ */
+  function buildFourColTable(rows) {
+    if (!rows.length) return '';
+    let html = '<table class="info-table"><tbody>';
+    let i = 0;
+    while (i < rows.length) {
+      const curr = rows[i];
+      if (curr.wide) {
+        html += `<tr><td class="label">${escapeHtml(curr.label)}</td><td class="value wide" colspan="3">${escapeHtml(curr.value)}</td></tr>`;
+        i++; continue;
+      }
+      const next = rows[i + 1];
+      if (next && !next.wide) {
+        html += `<tr>
+          <td class="label">${escapeHtml(curr.label)}</td><td class="value">${escapeHtml(curr.value)}</td>
+          <td class="label">${escapeHtml(next.label)}</td><td class="value">${escapeHtml(next.value)}</td>
+        </tr>`;
+        i += 2;
+      } else {
+        html += `<tr>
+          <td class="label">${escapeHtml(curr.label)}</td><td class="value">${escapeHtml(curr.value)}</td>
+          <td class="label empty">&nbsp;</td><td class="value empty">&nbsp;</td>
+        </tr>`;
+        i++;
+      }
+    }
+    html += '</tbody></table>';
+    return html;
+  }
+
+  /* ============================================================
+     ساخت سند خروجی
+     ============================================================ */
+  function buildDocumentHtml() {
+    const sections = collectData();
+    const fullName = `${firstName.value.trim()} ${lastName.value.trim()}`.trim();
+    const rules = [
+      'ثبت‌نام‌کننده متعهد به اجرا و انجام برنامه شخصی‌سازی‌شده خود است.',
+      'شهریه ثبت‌نام طبق تعرفه‌های مصوب آکادمی آریا، در زمان مشخص‌شده و بدون تأخیر پرداخت خواهد شد. در صورت نیاز به تأخیر، موضوع باید در گروه شخصی اعلام و مجوز تأخیر دریافت شود.',
+      'در صورت لغو ثبت‌نام برای ماه آینده، باید ۵ تا ۷ روز پیش از پایان ماه اطلاع‌رسانی انجام شود.',
+      'غیبت‌های غیرموجه بیش از ۳ جلسه، ابتدا موجب هشدار به والدین و سپس حذف از برنامه‌های ویژه مشاوره‌ای خواهد شد.'
+    ];
+
+    return `<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
+    <title>فرم ثبت‌نام آکادمی آریا</title>
+    <style>
+      @page { size: A4; margin: 10mm 8mm; }
+      * { box-sizing: border-box; }
+      body { font-family: Vazirmatn, Tahoma, Arial, sans-serif; direction: rtl; color: #0b1d2e; line-height: 1.6; font-size: 9pt; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .head { background: #0e2c4b; color: #fff; padding: 10px 14px; border-radius: 5px; margin-bottom: 10px; text-align: center; }
+      .head h1 { margin: 0 0 2px; font-size: 14pt; color: #fff; }
+      .head p { margin: 0; color: #c9dcec; font-size: 8pt; }
+      .student { margin: 0 0 10px; font-size: 9.5pt; }
+      h2 { color: #0e2c4b; font-size: 10pt; margin: 10px 0 4px; background: #e8f1f8; padding: 4px 9px; border-radius: 4px; border-right: 3px solid #1f5f8b; }
+      .info-table { width: 100%; border-collapse: collapse; margin: 0 0 8px; table-layout: fixed; }
+      .info-table td { border: 1px solid #b7cee0; padding: 3px 6px; font-size: 8pt; line-height: 1.55; vertical-align: top; text-align: right; word-break: break-word; }
+      .info-table td.label { width: 17%; font-weight: 700; background: #f1f6fb; color: #0e2c4b; }
+      .info-table td.value { width: 33%; background: #fff; }
+      .info-table td.value.wide { width: 83%; }
+      .info-table td.empty { background: #fbfdff; }
+      .rules { margin: 0 0 8px; padding-right: 16px; font-size: 8.5pt; line-height: 1.7; }
+      .rules li { margin-bottom: 3px; }
+      .privacy { background: #eef5fa; padding: 6px 9px; border-right: 3px solid #1f5f8b; border-radius: 4px; font-size: 8.5pt; margin: 6px 0 8px; }
+      .commit { border: 1px solid #cdddea; border-radius: 5px; padding: 8px 10px; background: #f6f9fc; font-size: 9pt; margin-bottom: 8px; line-height: 1.9; }
+      .signature { display: flex; gap: 40px; margin-top: 24px; }
+      .signature div { width: 50%; border-top: 1px solid #0e2c4b; padding-top: 6px; font-size: 9pt; color: #0e2c4b; }
+    </style></head><body>
+      <div class="head">
+        <h1>فرم ثبت‌نام آکادمی آریا</h1>
+        <p>ثبت‌نام و ارزیابی آموزشی · Academy Aria</p>
+      </div>
+      
+
+      ${sections.map(s => `<h2>${escapeHtml(s.title)}</h2>${buildFourColTable(s.rows)}`).join('')}
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <h2>تعهدات و قوانین آکادمی آریا</h2>
+      <ol class="rules">${rules.map(t => `<li>${escapeHtml(t)}</li>`).join('')}</ol>
+      <p class="privacy">کلیه اطلاعات ثبت‌شده محرمانه بوده و صرفاً برای بهبود فرآیند آموزشی استفاده می‌شود.</p>
+
+      <h2>متن تعهد</h2>
+      <div class="commit">اینجانب ${escapeHtml(commitmentName.value || '....................')} با کد ملی ${escapeHtml(commitmentNational.value || '....................')}، با آگاهی کامل از قوانین فوق، شرایط ثبت‌نام در آکادمی آریا را می‌پذیرم و خود را موظف می‌دانم که برای رسیدن به موفقیت، با اعتماد به مؤسسه آریا، تمام تلاش خود را در راستای انجام کارها، شرکت در کلاس‌ها و اجرای برنامه‌های تنظیم‌شده به کار بگیرم. در صورت انجام‌ندادن تعهدات، مسئولیت پیامدهای آن را مطابق توافق و قوانین مربوطه می‌پذیرم.</div>
+
+      <div class="signature">
+        <div>امضا: ${escapeHtml(document.getElementById('signature').value || '................................')}</div>
+        <div>تاریخ: ${escapeHtml(document.getElementById('signDate').value || '................................')}</div>
+      </div>
+    </body></html>`;
+  }
+
+  /* ============================================================
+     دکمه‌ها
+     ============================================================ */
+  document.getElementById('downloadPdf').addEventListener('click', () => {
+    if (!validateForm()) return;
+    let frame = document.getElementById('ariaPrintFrame');
+    if (!frame) {
+      frame = document.createElement('iframe');
+      frame.id = 'ariaPrintFrame';
+      frame.setAttribute('title', 'نسخه آماده چاپ');
+      Object.assign(frame.style, { position:'fixed', left:'0', bottom:'0', width:'0', height:'0', border:'0', visibility:'hidden' });
+      document.body.appendChild(frame);
+    }
+    const d = frame.contentWindow.document;
+    d.open(); d.write(buildDocumentHtml()); d.close();
+    statusBox.textContent = 'پنجره چاپ باز می‌شود؛ «ذخیره به‌صورت PDF» را انتخاب کنید.';
+    statusBox.className = 'status';
+    setTimeout(() => {
+      try { frame.contentWindow.focus(); frame.contentWindow.print(); }
+      catch(e) { statusBox.textContent = 'از Ctrl+P استفاده کنید.'; statusBox.className = 'status error'; }
+    }, 400);
+  });
+
+  document.getElementById('downloadWord').addEventListener('click', () => {
+    if (!validateForm()) return;
+    const html = buildDocumentHtml().replace('</head>', '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>');
+    const blob = new Blob(['\ufeff', html], { type: 'application/msword;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const safe = (lastName.value.trim() || 'student').replace(/[^\u0600-\u06FFa-zA-Z0-9_-]/g, '_');
+    a.href = url; a.download = `Aria-${safe}.doc`;
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+    statusBox.textContent = 'فایل Word دانلود شد.';
+    statusBox.className = 'status';
+  });
+
+  form.addEventListener('reset', () => {
+    setTimeout(() => {
+      form.querySelectorAll('[data-edited]').forEach(el => delete el.dataset.edited);
+      clearAllErrors();
+      statusBox.textContent = ''; statusBox.className = 'status';
+      city.disabled = true; cityList.innerHTML = '';
+      if (window.jalaliDatepicker) { try { jalaliDatepicker.hide(); } catch(e){} }
+    }, 0);
+  });
+
+  /* ============================================================
+     تقویم جلالی
+     ============================================================ */
+  function initDatePicker() {
+    if (typeof jalaliDatepicker !== 'undefined') {
+      jalaliDatepicker.startWatch({ persianDigits: true, autoShow: true, autoHide: true, hideAfterChange: true });
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initDatePicker);
+  else initDatePicker();
+
+  try {
+    const today = new Intl.DateTimeFormat('fa-IR', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+    document.getElementById('signDate').value = today;
+  } catch(e) {}
+
+})();
+</script>
+</body>
+</html>
